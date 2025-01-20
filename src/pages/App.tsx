@@ -1,48 +1,41 @@
 import { Route, Switch } from "wouter";
 import Basico from "./Basico";
+import MiPerfil from "./MiPerfil";
+import { Page } from "./Page";
+import { PageLayout } from "../layout/PageLayout";
+import { Producto } from "./Producto";
+import { Productos } from "./Productos";
 
 function App() {
   return (
     <>
-      <Switch>
-        <Route path="/">
+      <Route path="/">
+        <PageLayout>
+          <Page />
+        </PageLayout>
+      </Route>
+      <Route path="/basico">
+        <PageLayout>
           <Basico />
-        </Route>
-        <Route path="/app" nest>
-          <Switch>
-            <Route path="/">
-              <div>app</div>
-            </Route>
-            <Route path="/users" nest>
-              <Switch>
-                <Route path="/">
-                  <div>users</div>
-                </Route>
-                <Route path="/:id" nest>
-                  <Switch>
-                    <Route path="/">
-                      <div>user</div>
-                    </Route>
-                    <Route path="/orders">orders</Route>
-                    <Route>
-                      <div>no esiste esta pagina /app/users/0/*</div>
-                    </Route>
-                  </Switch>
-                </Route>
-                <Route>
-                  <div>no esiste esta pagina /app/users/*</div>
-                </Route>
-              </Switch>
-            </Route>
-            <Route>
-              <div>no esiste esta pagina /app/*</div>
-            </Route>
-          </Switch>
-        </Route>
-        <Route>
-          <div>no existe</div>
-        </Route>
-      </Switch>
+        </PageLayout>
+      </Route>
+      <Route path="/perfil">
+        <PageLayout>
+          <MiPerfil />
+        </PageLayout>
+      </Route>
+      <Route path="/productos">
+        <PageLayout>
+          <Productos />
+        </PageLayout>
+      </Route>
+      <Route path="/productos/:id">
+        {(params) => (
+          <PageLayout>
+            <Producto id={params.id} />
+          </PageLayout>
+        )}
+      </Route>
     </>
   );
 }
