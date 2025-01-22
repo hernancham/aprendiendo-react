@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { TypeProducto } from "../types/producto";
 
 interface CardProductProps {
@@ -14,6 +15,9 @@ export const CardProduct = ({ producto }: CardProductProps) => {
         <h2 className="card-title">{producto.nombre}</h2>
         <p>{producto.descripcion}</p>
         <div className="card-actions justify-end">
+          <Link to={"/productos/" + producto.id} asChild>
+            <a className="btn btn-secondary">Ver</a>
+          </Link>
           <button className="btn btn-primary">Comprar</button>
         </div>
       </div>
